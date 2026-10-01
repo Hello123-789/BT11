@@ -1,0 +1,17 @@
+# Build target
+target/
+*.class
+
+# Temporary / Agent generated files
+code_screenshots/
+temp_edge/
+.system_generated/
+*.docx
+/*.png
+*.tmp.png
+generate_*.py
+test_*.py
+
+# OS files
+Thumbs.db
+.DS_Store

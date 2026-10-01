@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemesh>
+    <!-- Decorator cho trang Admin -->
+    <mapping path="/admin/*" decorator="/WEB-INF/views/decorators/admin_decorator.jsp"/>
+    
+    <!-- Decorator cho trang User / Khách -->
+    <mapping path="/*" decorator="/WEB-INF/views/decorators/user_decorator.jsp"/>
+</sitemesh>
