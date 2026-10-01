@@ -78,6 +78,24 @@
                     </div>
                 </form>
 
+                <!-- Nút Giỏ Hàng -->
+                <ul class="navbar-nav me-3 align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link text-white position-relative px-2" href="${pageContext.request.contextPath}/cart" title="Xem giỏ hàng">
+                            <i class="bi bi-cart3 fs-5 text-warning"></i>
+                            <c:set var="cartCount" value="0"/>
+                            <c:if test="${sessionScope.cart != null}">
+                                <c:forEach var="ci" items="${sessionScope.cart}">
+                                    <c:set var="cartCount" value="${cartCount + ci.quantity}"/>
+                                </c:forEach>
+                            </c:if>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.65rem;">
+                                ${cartCount}
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+
                 <!-- Tài khoản -->
                 <ul class="navbar-nav align-items-center">
                     <c:choose>

@@ -28,6 +28,22 @@ public class CartItem_24110341 implements Serializable {
 
     public CartItem_24110341() {}
 
+    public CartItem_24110341(Product_24110341 product, int quantity) {
+        this.product = product;
+        this.quantity = quantity;
+        this.unitPrice = (product != null && product.getPrice() != null) ? product.getPrice() : 0.0;
+    }
+
+    public Double getSubtotal() {
+        if (unitPrice != null) {
+            return unitPrice * quantity;
+        }
+        if (product != null && product.getPrice() != null) {
+            return product.getPrice() * quantity;
+        }
+        return 0.0;
+    }
+
     public int getCartItemId() { return cartItemId; }
     public void setCartItemId(int cartItemId) { this.cartItemId = cartItemId; }
 

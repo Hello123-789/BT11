@@ -58,8 +58,17 @@
                             <td class="text-danger fw-bold fs-4"><fmt:formatNumber value="${product.price}" pattern="#,###"/> VNĐ</td>
                         </tr>
                         <tr>
-                            <th class="bg-light">Số lượng</th>
-                            <td><strong>${product.amount}</strong> cây có sẵn</td>
+                            <th class="bg-light">Tình trạng kho</th>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${product.stock > 0}">
+                                        <span class="badge bg-success fs-6"><i class="bi bi-check-circle me-1"></i>Còn hàng (${product.stock} sản phẩm)</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="badge bg-danger fs-6"><i class="bi bi-x-circle me-1"></i>Tạm hết hàng</span>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
                         </tr>
                         <tr>
                             <th class="bg-light">Mô tả</th>
@@ -68,11 +77,46 @@
                     </tbody>
                 </table>
 
-                <div class="d-flex gap-2 mt-4">
-                    <a href="${pageContext.request.contextPath}/products" class="btn btn-secondary px-4">
-                        <i class="bi bi-arrow-left me-1"></i>Quay Lại Danh Sách
-                    </a>
-                </div>
+                <!-- Form Thêm Vào Giỏ Hàng -->
+                <c:choose>
+                    <c:when test="${product.stock > 0}">
+                        <form action="${pageContext.request.contextPath}/cart" method="post" class="card p-3 bg-light border-0 shadow-sm mt-3">
+                            <input type="hidden" name="action" value="add">
+                            <input type="hidden" name="id" value="${product.productId}">
+                            <div class="row align-items-center g-3">
+                                <div class="col-auto">
+                                    <label class="fw-bold text-dark mb-0">Số lượng mua:</label>
+                                </div>
+                                <div class="col-auto" style="width: 130px;">
+                                    <input type="number" name="quantity" class="form-control text-center fw-bold" 
+                                           value="1" min="1" max="${product.stock}" 
+                                           onchange="if(parseInt(this.value) > ${product.stock}) { alert('Số lượng tối đa theo tồn kho là ${product.stock}!'); this.value = ${product.stock}; }">
+                                </div>
+                                <div class="col-auto">
+                                    <small class="text-muted">(Tối đa: ${product.stock} cây)</small>
+                                </div>
+                                <div class="col-12 d-flex gap-2 mt-3">
+                                    <button type="submit" class="btn btn-warning btn-lg fw-bold px-4 shadow-sm text-dark">
+                                        <i class="bi bi-cart-plus me-2"></i>Thêm Vào Giỏ Hàng
+                                    </button>
+                                    <a href="${pageContext.request.contextPath}/products" class="btn btn-outline-secondary btn-lg px-4">
+                                        <i class="bi bi-arrow-left me-1"></i>Quay Lại
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="alert alert-secondary mt-3">
+                            <i class="bi bi-info-circle me-2"></i>Sản phẩm này tạm thời hết hàng trong kho. Vui lòng quay lại sau!
+                        </div>
+                        <div class="mt-3">
+                            <a href="${pageContext.request.contextPath}/products" class="btn btn-secondary px-4">
+                                <i class="bi bi-arrow-left me-1"></i>Quay Lại Danh Sách
+                            </a>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>

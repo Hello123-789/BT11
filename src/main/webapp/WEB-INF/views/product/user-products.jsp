@@ -72,12 +72,32 @@
                             Mã: ${p.productCode} | Có sẵn: ${p.amount} cây
                         </p>
                         <div class="mt-auto pt-2 border-top">
-                            <div class="price mb-2 text-danger fw-bold fs-5">
-                                <fmt:formatNumber value="${p.price}" pattern="#,###"/> VNĐ
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div class="price text-danger fw-bold fs-5">
+                                    <fmt:formatNumber value="${p.price}" pattern="#,###"/> ₫
+                                </div>
+                                <small class="text-muted">Kho: <strong class="text-success">${p.stock}</strong></small>
                             </div>
-                            <a href="${pageContext.request.contextPath}/product/detail?id=${p.productId}" class="btn btn-outline-primary btn-sm w-100 fw-bold">
-                                <i class="bi bi-eye me-1"></i>Xem Chi Tiết
-                            </a>
+                            <div class="d-flex gap-2">
+                                <a href="${pageContext.request.contextPath}/product/detail?id=${p.productId}" class="btn btn-outline-secondary btn-sm flex-fill fw-bold">
+                                    <i class="bi bi-eye me-1"></i>Chi Tiết
+                                </a>
+                                <c:choose>
+                                    <c:when test="${p.stock > 0}">
+                                        <form action="${pageContext.request.contextPath}/cart" method="post" class="flex-fill">
+                                            <input type="hidden" name="action" value="add">
+                                            <input type="hidden" name="id" value="${p.productId}">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <button type="submit" class="btn btn-warning btn-sm w-100 fw-bold text-dark" title="Thêm vào giỏ hàng">
+                                                <i class="bi bi-cart-plus me-1"></i>Thêm Giỏ
+                                            </button>
+                                        </form>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button class="btn btn-secondary btn-sm flex-fill disabled" disabled>Hết hàng</button>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
                         </div>
                     </div>
                 </div>

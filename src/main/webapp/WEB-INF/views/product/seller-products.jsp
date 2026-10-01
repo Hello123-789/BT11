@@ -46,14 +46,33 @@
                                     </h6>
                                     <p class="card-text mb-1 small text-muted">Mã: ${p.productCode}</p>
                                     <p class="card-text mb-1 small text-muted">Danh mục: <span class="badge bg-secondary">${p.category.categoryName}</span></p>
-                                    <div class="mt-auto pt-2">
-                                        <div class="price mb-1">
-                                            <fmt:formatNumber value="${p.price}" pattern="#,###"/> VNĐ
+                                    <div class="mt-auto pt-2 border-top">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <div class="price text-danger fw-bold">
+                                                <fmt:formatNumber value="${p.price}" pattern="#,###"/> ₫
+                                            </div>
+                                            <small class="text-muted">Kho: <strong class="text-success">${p.stock}</strong></small>
                                         </div>
-                                        <p class="card-text mb-2 small text-secondary">Số lượng: ${p.amount} cây</p>
-                                        <a href="${pageContext.request.contextPath}/product/detail?id=${p.productId}" class="btn btn-sm btn-outline-primary w-100 fw-bold">
-                                            <i class="bi bi-eye me-1"></i>Xem Chi Tiết
-                                        </a>
+                                        <div class="d-flex gap-2">
+                                            <a href="${pageContext.request.contextPath}/product/detail?id=${p.productId}" class="btn btn-sm btn-outline-secondary flex-fill fw-bold">
+                                                <i class="bi bi-eye me-1"></i>Chi Tiết
+                                            </a>
+                                            <c:choose>
+                                                <c:when test="${p.stock > 0}">
+                                                    <form action="${pageContext.request.contextPath}/cart" method="post" class="flex-fill">
+                                                        <input type="hidden" name="action" value="add">
+                                                        <input type="hidden" name="id" value="${p.productId}">
+                                                        <input type="hidden" name="quantity" value="1">
+                                                        <button type="submit" class="btn btn-sm btn-warning w-100 fw-bold text-dark" title="Thêm vào giỏ">
+                                                            <i class="bi bi-cart-plus me-1"></i>Thêm Giỏ
+                                                        </button>
+                                                    </form>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <button class="btn btn-sm btn-secondary flex-fill disabled" disabled>Hết hàng</button>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
