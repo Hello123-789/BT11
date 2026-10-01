@@ -54,6 +54,11 @@
                             <i class="bi bi-shop me-1"></i>Thương Hiệu
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/my-orders">
+                            <i class="bi bi-receipt me-1"></i>Đơn Hàng Của Tôi
+                        </a>
+                    </li>
                     <c:if test="${sessionScope.currentUser != null and (sessionScope.currentUser.seller != null or sessionScope.currentUser.role.roleName == 'SELLER')}">
                         <li class="nav-item">
                             <a class="nav-link text-success fw-bold" href="${pageContext.request.contextPath}/seller/products">

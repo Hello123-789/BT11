@@ -62,12 +62,18 @@ CREATE TABLE Product (
     CONSTRAINT fk_product_seller FOREIGN KEY (sellerId) REFERENCES Seller(sellerId) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
--- 6. BẢNG Cart
+-- 6. BẢNG Cart (Hỗ trợ quản lý đơn hàng & Thanh toán COD)
 CREATE TABLE Cart (
     cartId INT AUTO_INCREMENT PRIMARY KEY,
-    userId INT,
+    userId INT NULL,
     buyDate DATETIME DEFAULT CURRENT_TIMESTAMP,
-    status INT DEFAULT 1,
+    status INT DEFAULT 1, -- 1: Chờ xử lý / Đã đặt hàng COD, 0: Đã hủy, 2: Đang giao, 3: Hoàn thành
+    receiverName VARCHAR(100),
+    receiverPhone VARCHAR(20),
+    address VARCHAR(500),
+    note VARCHAR(500),
+    paymentMethod VARCHAR(50) DEFAULT 'COD',
+    totalMoney DOUBLE DEFAULT 0,
     CONSTRAINT fk_cart_user FOREIGN KEY (userId) REFERENCES Users(userId) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 

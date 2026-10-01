@@ -24,6 +24,7 @@ public class CartDaoImpl_24110341 implements ICartDao_24110341 {
         } catch (Exception e) {
             if (trans.isActive()) trans.rollback();
             e.printStackTrace();
+            throw new RuntimeException("Lỗi khi lưu đơn hàng: " + e.getMessage(), e);
         } finally {
             em.close();
         }

@@ -61,9 +61,12 @@
                     <p class="text-muted col-md-6 mx-auto mb-4">
                         Hãy dạo quanh cửa hàng và chọn những cây vợt, đôi giày hoặc phụ kiện cầu lông chính hãng ưng ý nhất nhé!
                     </p>
-                    <div>
-                        <a href="${pageContext.request.contextPath}/products" class="btn btn-warning px-4 py-2 fw-bold shadow-sm">
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="${pageContext.request.contextPath}/products" class="btn btn-warning px-4 py-2 fw-bold shadow-sm text-dark">
                             <i class="bi bi-bag-plus me-1"></i>Khám Phá Sản Phẩm Ngay
+                        </a>
+                        <a href="${pageContext.request.contextPath}/my-orders" class="btn btn-outline-primary px-4 py-2 fw-bold">
+                            <i class="bi bi-clock-history me-1"></i>Xem Đơn Hàng Của Tôi
                         </a>
                     </div>
                 </div>
