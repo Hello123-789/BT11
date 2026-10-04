@@ -56,8 +56,23 @@ public class CartServiceImpl_24110341 implements ICartService_24110341 {
     }
 
     @Override
+    public List<Cart_24110341> findAll() {
+        return cartDao.findAll();
+    }
+
+    @Override
     public List<Cart_24110341> findByUserId(int userId) {
         return cartDao.findByUserId(userId);
+    }
+
+    @Override
+    public List<Cart_24110341> findByUserIdAndStatus(int userId, int status) {
+        return cartDao.findByUserIdAndStatus(userId, status);
+    }
+
+    @Override
+    public List<Cart_24110341> findByStatus(int status) {
+        return cartDao.findByStatus(status);
     }
 
     @Override

@@ -10,6 +10,8 @@ public interface ICartDao_24110341 {
     Cart_24110341 findById(int cartId);
     List<Cart_24110341> findAll();
     List<Cart_24110341> findByUserId(int userId);
+    List<Cart_24110341> findByUserIdAndStatus(int userId, int status);
+    List<Cart_24110341> findByStatus(int status);
     void insertItem(CartItem_24110341 item);
     List<CartItem_24110341> findItemsByCartId(int cartId);
 }

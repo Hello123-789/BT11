@@ -84,6 +84,53 @@ public class CartDaoImpl_24110341 implements ICartDao_24110341 {
     }
 
     @Override
+    public List<Cart_24110341> findByUserIdAndStatus(int userId, int status) {
+        EntityManager em = JPAConfig_24110341.getEntityManager();
+        try {
+            String jpql = "SELECT c FROM Cart_24110341 c WHERE c.user.userId = :userId ";
+            if (status == 7) {
+                jpql += "AND (c.status = 7 OR c.status = 0) ";
+            } else {
+                jpql += "AND c.status = :status ";
+            }
+            jpql += "ORDER BY c.buyDate DESC";
+            TypedQuery<Cart_24110341> query = em.createQuery(jpql, Cart_24110341.class);
+            query.setParameter("userId", userId);
+            if (status != 7) {
+                query.setParameter("status", status);
+            }
+            return query.getResultList();
+        } catch (Exception e) {
+            return new ArrayList<>();
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
+    public List<Cart_24110341> findByStatus(int status) {
+        EntityManager em = JPAConfig_24110341.getEntityManager();
+        try {
+            String jpql = "SELECT c FROM Cart_24110341 c WHERE ";
+            if (status == 7) {
+                jpql += "(c.status = 7 OR c.status = 0) ";
+            } else {
+                jpql += "c.status = :status ";
+            }
+            jpql += "ORDER BY c.buyDate DESC";
+            TypedQuery<Cart_24110341> query = em.createQuery(jpql, Cart_24110341.class);
+            if (status != 7) {
+                query.setParameter("status", status);
+            }
+            return query.getResultList();
+        } catch (Exception e) {
+            return new ArrayList<>();
+        } finally {
+            em.close();
+        }
+    }
+
+    @Override
     public void insertItem(CartItem_24110341 item) {
         EntityManager em = JPAConfig_24110341.getEntityManager();
         EntityTransaction trans = em.getTransaction();

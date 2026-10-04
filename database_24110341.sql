@@ -160,3 +160,36 @@ INSERT INTO Product (productName, productCode, categoryId, description, price, a
 ('Victor GR262', 2009, 2, 'Quấn cán Victor GR262.', 70000, 45, 350, 'images/uploads/gr262.jpg', 20, 1, '2026-09-30', 2),
 ('Li-Ning GP20', 3006, 2, 'Quấn cán vợt Li-Ning GP20.', 75000, 40, 400, 'images/uploads/gp20.jpg', 22, 1, '2026-10-01', 3),
 ('Yonex 3D Power Cushion Socks', 1014, 2, 'Vớ cầu lông Yonex 3D Power Cushion.', 120000, 35, 250, 'images/uploads/powersocks.jpg', 30, 1, '2026-10-02', 1);
+
+-- 8. THÊM ĐƠN HÀNG MẪU VỚI ĐẦY ĐỦ 8 TRẠNG THÁI (Dành cho kiểm tra và quan sát chức năng Lọc đơn hàng)
+-- userId = 6 là tài khoản 'user' (Khách hàng Thân Thiết)
+-- Các trạng thái:
+-- 1: Đơn hàng mới
+-- 2: Đã xác nhận
+-- 3: Chuẩn bị hàng
+-- 4: Vận chuyển
+-- 5: Giao hàng
+-- 6: Đã giao
+-- 7: Đơn hàng hủy
+-- 8: Đơn hàng hoàn
+INSERT INTO Cart (cartId, userId, buyDate, status, receiverName, receiverPhone, address, note, paymentMethod, totalMoney) VALUES
+(1, 6, '2026-10-04 08:00:00', 1, 'Nguyễn Văn A', '0901234567', 'Số 1 Võ Văn Ngân, TP. Thủ Đức, TP.HCM', 'Giao trong giờ hành chính', 'COD', 4500000),
+(2, 6, '2026-10-03 14:30:00', 2, 'Trần Thị B', '0912345678', '123 Lê Văn Việt, TP. Thủ Đức, TP.HCM', 'Gọi trước khi giao', 'COD', 4200000),
+(3, 6, '2026-10-02 09:15:00', 3, 'Lê Văn C', '0923456789', '45 Hoàng Diệu 2, TP. Thủ Đức, TP.HCM', 'Đóng gói cẩn thận giúp mình', 'COD', 4100000),
+(4, 6, '2026-10-01 16:45:00', 4, 'Phạm Hoàng D', '0934567890', '78 Kha Vạn Cân, TP. Thủ Đức, TP.HCM', 'Giao bưu cục gần nhất', 'COD', 4600000),
+(5, 6, '2026-09-30 11:20:00', 5, 'Võ Minh E', '0945678901', '89 Đặng Văn Bi, TP. Thủ Đức, TP.HCM', 'Giao tận tay', 'COD', 3900000),
+(6, 6, '2026-09-29 10:00:00', 6, 'Đỗ Quỳnh F', '0956789012', '12 Tô Vĩnh Diện, TP. Thủ Đức, TP.HCM', 'Đã nhận hàng thành công', 'COD', 4000000),
+(7, 6, '2026-09-28 15:10:00', 7, 'Bùi Văn G', '0967890123', '34 Quang Trung, Gò Vấp, TP.HCM', 'Khách đổi ý muốn đổi sang mẫu khác', 'COD', 3400000),
+(8, 6, '2026-09-27 13:40:00', 8, 'Hoàng Thu H', '0978901234', '56 Nguyễn Kiệm, Phú Nhuận, TP.HCM', 'Không liên lạc được người nhận, hoàn về shop', 'COD', 3200000);
+
+-- THÊM CHI TIẾT ĐƠN HÀNG CartItem CHO 8 ĐƠN HÀNG TRÊN
+INSERT INTO CartItem (cartItemId, cartId, productId, quantity, unitPrice) VALUES
+(1, 1, 1, 1, 4500000),
+(2, 2, 2, 1, 4200000),
+(3, 3, 3, 1, 4100000),
+(4, 4, 4, 1, 4600000),
+(5, 5, 5, 1, 3900000),
+(6, 6, 6, 1, 4000000),
+(7, 7, 7, 1, 3400000),
+(8, 8, 9, 1, 3200000);
+
